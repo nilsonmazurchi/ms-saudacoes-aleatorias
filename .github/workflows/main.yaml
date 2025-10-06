@@ -37,12 +37,12 @@ jobs:
       uses: actions/setup-go@v5    
     - name: Install gotestsum
       run: go install gotest.tools/gotestsum@latest
-  #   - name: Run tests and generate report
-  #     run: |
-  #       echo "Running tests and generating report..."
-  #       # CGO_ENABLED=1 é necessário se houver código C, mas requer gcc.
-  #       # A imagem ubuntu-latest já tem o gcc.
-  #       CGO_ENABLED=1 gotestsum --junitfile report.xml --format testname
+    - name: Run tests and generate report
+      run: |
+        echo "Running tests and generating report..."
+        # CGO_ENABLED=1 é necessário se houver código C, mas requer gcc.
+        # A imagem ubuntu-latest já tem o gcc.
+        CGO_ENABLED=1 gotestsum --junitfile report.xml --format testname
   build:
     name: Build Code
     runs-on: ubuntu-latest
