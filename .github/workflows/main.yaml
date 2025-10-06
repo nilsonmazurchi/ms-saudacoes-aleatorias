@@ -50,9 +50,10 @@ jobs:
     # - lint
     # - test
     steps:
-    # - name: Checkout Code
-    #   uses: actions/checkout@v4
-    # - name: Set up Go
-    #   uses: actions/setup-go@v5
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    - name: Set up Go
+      uses: actions/setup-go@v5
     - name: Build app
       run: go build main.go
+      
