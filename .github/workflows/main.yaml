@@ -1,0 +1,58 @@
+﻿name: CI/CD - Saudações Aleatórias
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - main
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    - name: Set up Go
+      uses: actions/setup-go@v5
+    
+    - name: Go Fmt & Vet
+      run: |
+        echo "Linting code..."
+        go fmt $(go list ./...)
+        go vet $(go list ./...)
+    # - name: Run golangci-lint
+    #   uses: golangci/golangci-lint-action@v6
+      # with:
+      #   version: v1.58
+      #   args: --verbose
+  
+  # test:
+  #   name: Test Code
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout Code
+  #     uses: actions/checkout@v4
+  #   - name: Set up Go
+  #     uses: actions/setup-go@v5    
+  #   - name: Install gotestsum
+  #     run: go install gotest.tools/gotestsum@latest
+  #   - name: Run tests and generate report
+  #     run: |
+  #       echo "Running tests and generating report..."
+  #       # CGO_ENABLED=1 é necessário se houver código C, mas requer gcc.
+  #       # A imagem ubuntu-latest já tem o gcc.
+  #       CGO_ENABLED=1 gotestsum --junitfile report.xml --format testname
+  build:
+    name: Build Code
+    runs-on: ubuntu-latest
+    # needs:
+    # - lint
+    # - test
+    steps:
+    # - name: Checkout Code
+    #   uses: actions/checkout@v4
+    # - name: Set up Go
+    #   uses: actions/setup-go@v5
+    - name: Build app
+      run: go build main.go
