@@ -93,3 +93,31 @@ jobs:
             ${{ env.DOCKER_IMAGE_NAME }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  # Job para fazer o deploy da aplicação
+  deploy:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: build-and-push # Depende do sucesso do build
+    if: github.event_name == 'push' && github.ref_name == 'main'
+    environment: staging # Define um ambiente (opcional, bom para proteção)
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Terraform Init
+        id: init
+        run: terraform -chdir=infra init
+        env:
+          KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
+      - name: Terraform Validate
+        id: validate
+        run: terraform -chdir=infra validate
+      - name: Terraform Apply
+        id: apply
+        run: terraform -chdir=infra apply -auto-approve
+        env:
+          KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
+          TF_VAR_docker_image_name: ${{ env.DOCKER_IMAGE_NAME }}
+          TF_VAR_docker_image_tag: ${{ env.DOCKER_IMAGE_TAG }}
