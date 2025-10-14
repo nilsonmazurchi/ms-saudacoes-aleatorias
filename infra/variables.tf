@@ -20,16 +20,6 @@ variable "container_port" {
 
 variable "docker_image_name" {
   type    = string
-  default = "xxxxxx/ms-saudacoes-aleatorias"
-}
-
-variable "docker_image_tag" {
-  type    = string
-  default = "latest"
-}
-
-variable "docker_image_name" {
-  type    = string
   default = "nilsonmazurchi/ms-saudacoes-aleatorias"
   validation {
     condition     = can(regex("^[a-z0-9]+(?:[._-][a-z0-9]+)*/[a-z0-9]+(?:[._-][a-z0-9]+)*$", var.docker_image_name))
