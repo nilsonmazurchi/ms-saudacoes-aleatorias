@@ -1,11 +1,11 @@
 variable "app_name" {
   type    = string
-  default = "ms-saudacoes-aleatorias01"
+  default = "ms-saudacoesaleatorias"
 }
 
 variable "service_name" {
   type    = string
-  default = "saudacoes-aleatorias01"
+  default = "saudacoesaleatorias"
 }
 
 variable "instance_type" {
