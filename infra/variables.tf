@@ -1,6 +1,6 @@
 variable "app_name" {
   type    = string
-  default = "ms-saudacoesaleatorias"
+  default = "mssaudacoesaleatorias"
 }
 
 variable "service_name" {
@@ -20,7 +20,7 @@ variable "container_port" {
 
 variable "docker_image_name" {
   type    = string
-  default = "nilsonmazurchi/ms-saudacoes-aleatorias"
+  default = "xxxxxx/ms-saudacoes-aleatorias"
 }
 
 variable "docker_image_tag" {
