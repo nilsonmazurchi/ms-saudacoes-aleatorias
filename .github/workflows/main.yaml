@@ -97,7 +97,6 @@ jobs:
         image_name: ${{ env.DOCKER_USER }}/ms-${{ env.SERVICE_NAME }}
         image_tag: 1.0.${{ github.run_id }}
 
-
   # Job para fazer o deploy da aplicação
   deploy:
   name: Deploy to Staging
@@ -118,6 +117,11 @@ jobs:
 
     - name: Terraform Validate
       run: terraform -chdir=infra validate
+
+    - name: Check Docker image variables
+      run: |
+        echo "Docker Image Name: ${{ needs.build-and-push.outputs.docker_image_name }}"
+        echo "Docker Image Tag: ${{ needs.build-and-push.outputs.docker_image_tag }}"
 
     - name: Terraform Apply
       run: terraform -chdir=infra apply -auto-approve
