@@ -1,11 +1,11 @@
 variable "app_name" {
   type    = string
-  default = "saudacoesaleatoriascomp"
+  default = "saudacoesaleatoriasc"
 }
 
 variable "service_name" {
   type    = string
-  default = "saudacoesaleatoriascomp"
+  default = "saudacoesaleatoriasc"
 }
 
 variable "instance_type" {
